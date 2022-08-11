@@ -1,4 +1,4 @@
-import { Container } from "@chakra-ui/react";
+import { Container, Text } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
 
 import { Employee } from "./components/Employee";
