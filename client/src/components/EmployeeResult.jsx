@@ -1,13 +1,13 @@
 import { HStack, Image, Text, VStack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-import { useSearchQuery } from "../hooks/useSearchQuery";
+import { useSearchTerm } from "../hooks/useSearchTerm";
 
 export function EmployeeResult({ employee }) {
-  const [searchQuery] = useSearchQuery();
+  const [searchTerm] = useSearchTerm();
 
   return (
-    <Link to={`/employees/${employee.id}?q=${searchQuery}`}>
+    <Link to={`/employees/${employee.id}?q=${searchTerm}`}>
       <HStack boxShadow="md">
         <Image
           boxSize="105px"
