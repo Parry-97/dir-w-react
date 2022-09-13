@@ -8,25 +8,25 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
-import { useSearchQuery } from "../hooks/useSearchQuery";
+import { useSearchTerm } from "../hooks/useSearchTerm";
 
 export function SearchInput() {
-  const [searchQuery, setSearchQuery] = useSearchQuery();
+  const [searchTerm, setSearchTerm] = useSearchTerm();
 
-  const resetSearchQuery = () => setSearchQuery("");
-  const handleChange = (event) => setSearchQuery(event.target.value);
+  const resetSearchTerm = () => setSearchTerm("");
+  const handleChange = (event) => setSearchTerm(event.target.value);
 
   const navigate = useNavigate();
-  const handleFocus = () => navigate(`/?q=${searchQuery}`);
+  const handleFocus = () => navigate(`/?q=${searchTerm}`);
 
   return (
     <InputGroup onFocus={handleFocus}>
       <InputLeftElement pointerEvents="none">
         <SearchIcon />
       </InputLeftElement>
-      <Input placeholder="search" value={searchQuery} onChange={handleChange} />
+      <Input placeholder="search" value={searchTerm} onChange={handleChange} />
       <InputRightElement>
-        <Button aria-label="clear search" onClick={resetSearchQuery}>
+        <Button aria-label="clear search" onClick={resetSearchTerm}>
           <CloseIcon color="gray.600" />
         </Button>
       </InputRightElement>

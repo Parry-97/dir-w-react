@@ -1,19 +1,19 @@
 import { Heading, SimpleGrid } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 
-import { useSearchQuery } from "../hooks/useSearchQuery";
+import { useSearchTerm } from "../hooks/useSearchTerm";
 import { EmployeeResult } from "./EmployeeResult";
 
 export const SearchResults = () => {
-  const [searchQuery] = useSearchQuery();
+  const [searchTerm] = useSearchTerm();
 
   const {
     data: searchResults,
     isError,
     isLoading,
-  } = useQuery(["search", searchQuery], async () => {
+  } = useQuery(["search", searchTerm], async () => {
     const response = await fetch(
-      `http://localhost:3030/employees?q=${searchQuery}`
+      `http://localhost:3030/employees?q=${searchTerm}`
     );
     return response.json();
   });
@@ -23,7 +23,7 @@ export const SearchResults = () => {
   return (
     <>
       <Heading size="md" pb={4}>
-        {searchQuery ? "Search Results" : "All Employees"} (
+        {searchTerm ? "Search Results" : "All Employees"} (
         {searchResults.length})
       </Heading>
       <SimpleGrid columns={2} spacing={4}>
