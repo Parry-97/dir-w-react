@@ -6,7 +6,7 @@ export const useSearchTerm = () => {
   // the || (logical or) operator will return the first value if it's truthy;
   //   otherwise it will return the second value
   const searchTerm = searchParams.get("q") || "";
-  const setSearchTerm = (searchTerm) => setSearchParams({ q: searchTerm });
+  const setSearchTerm = (newTerm) => setSearchParams({ q: newTerm });
 
   return [searchTerm, setSearchTerm];
 };
