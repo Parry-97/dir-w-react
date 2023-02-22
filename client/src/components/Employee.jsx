@@ -5,7 +5,6 @@ import {
   Image,
   Text,
   Container,
-  flexbox,
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
@@ -28,6 +27,10 @@ const Employee = () => {
 
   if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>No Employee found</div>;
   }
 
   return (
