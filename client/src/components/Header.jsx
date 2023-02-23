@@ -2,7 +2,7 @@ import { Heading, HStack } from "@chakra-ui/react";
 
 import { SongRiverLogo } from "./SongRiverLogo";
 
-export function Header() {
+export function Header({ children }) {
   return (
     <HStack
       direction="row"
@@ -17,6 +17,7 @@ export function Header() {
       <Heading as="h1" size="lg">
         Employee&nbsp;&nbsp;Directory
       </Heading>
+      {children}
     </HStack>
   );
 }
