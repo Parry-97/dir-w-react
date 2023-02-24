@@ -5,33 +5,32 @@ import {
   InputLeftElement,
   InputRightElement,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router";
+// import { useEffect, useState } from "react";
+// import { useSearchParams } from "react-router-dom";
+import { useSearchTerm } from "./custom-hooks";
 
 const SearchInput = () => {
-  const [searchParams, setSearchParams] = useSearchParams({ q: "" });
-  const [searchValue, setsearchValue] = useState("");
-
-  useEffect(() => {
-    setSearchParams({ q: searchValue });
-  }, [searchValue]);
+  const [searchTerm, setSearchValue] = useSearchTerm();
+  const navigate = useNavigate();
 
   return (
-    <div>
+    <div onFocus={() => navigate(`/?q=${searchTerm}`)}>
       <InputGroup>
         <InputLeftElement children={<SearchIcon />}></InputLeftElement>
         <Input
           placeholder="search"
           // @ts-ignore
-          value={searchValue}
+          value={searchTerm}
           onChange={(evt) => {
-            setsearchValue(evt.target.value);
-            setSearchParams({ q: evt.target.value });
+            // @ts-ignore
+            setSearchValue(evt.target.value);
           }}
         ></Input>
         <InputRightElement
           //INFO: Use setSearchParams (returned from useSearchParams) to clear the search term.
-          onClick={(evt) => setsearchValue("")}
+          // @ts-ignore
+          onClick={(evt) => setSearchValue("")}
           children={<CloseIcon />}
         ></InputRightElement>
       </InputGroup>

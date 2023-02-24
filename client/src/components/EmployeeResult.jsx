@@ -1,9 +1,16 @@
 import { Text, Container, Image, VStack, HStack } from "@chakra-ui/react";
 import React from "react";
+import { useNavigate } from "react-router";
 
 const EmployeeResult = ({ employeeData }) => {
+  const navigate = useNavigate();
+
   return (
-    <Container boxShadow={"xl"}>
+    <Container
+      cursor={"pointer"}
+      onClick={() => navigate(`/employees/${employeeData.id}`)}
+      boxShadow={"xl"}
+    >
       <HStack>
         <Image
           width={105}

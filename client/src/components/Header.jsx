@@ -1,8 +1,10 @@
 import { Heading, HStack } from "@chakra-ui/react";
+import { useNavigate } from "react-router";
 
 import { SongRiverLogo } from "./SongRiverLogo";
 
 export function Header({ children }) {
+  const navigate = useNavigate();
   return (
     <HStack
       direction="row"
@@ -14,7 +16,12 @@ export function Header({ children }) {
       w="100vw"
     >
       <SongRiverLogo size="5xl" />
-      <Heading as="h1" size="lg">
+      <Heading
+        cursor={"pointer"}
+        onClick={() => navigate("/")}
+        as="h1"
+        size="lg"
+      >
         Employee&nbsp;&nbsp;Directory
       </Heading>
       {children}

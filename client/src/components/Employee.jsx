@@ -4,15 +4,23 @@ import { useParams } from "react-router-dom";
 
 export function Employee() {
   const { id } = useParams();
-  const { isLoading, data } = useQuery(["employee", id], async () => {
+  const { isLoading, data, isError } = useQuery(["employee", id], async () => {
     const response = await fetch(`http://localhost:3030/employees/${id}`);
+    if (!response.ok) {
+      throw new Error("Error occured on employee data request");
+    }
     return response.json();
   });
 
-  if (isLoading) return <Text>Loading...</Text>;
+  if (isLoading || isError) return <Text>Loading...</Text>;
 
   return (
-    <HStack spacing={10} alignItems="center" justifyContent="center">
+    <HStack
+      marginTop={"10"}
+      spacing={10}
+      alignItems="center"
+      justifyContent="center"
+    >
       <Image
         boxSize="175px"
         src={`http://localhost:3030/${data.imageFilePath}`}
