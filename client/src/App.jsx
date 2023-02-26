@@ -7,7 +7,7 @@ import { SearchResults } from "./components/SearchResults";
 
 function App() {
   return (
-    <>
+    <div style={{ position: "relative" }}>
       <Header />
       <Container pt="6" maxW="container.md">
         <Routes>
@@ -15,7 +15,7 @@ function App() {
           <Route path="employees/:id" element={<Employee />} />
         </Routes>
       </Container>
-    </>
+    </div>
   );
 }
 

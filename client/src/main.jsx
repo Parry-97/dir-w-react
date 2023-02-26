@@ -9,6 +9,7 @@ import theme from "./theme";
 
 const queryClient = new QueryClient();
 
+// @ts-ignore
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
