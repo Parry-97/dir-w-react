@@ -29,17 +29,8 @@ export const SearchResults = () => {
     { refetchOnWindowFocus: false }
   );
 
-  // if (isFetching) {
-  //   return <Spinner position={"absolute"} />;
-  // }
-
-  return (
-    <>
-      <Heading size="md" pb={4}>
-        {searchTerm ? "Search Results" : "All Employees"} (
-        {searchResults && searchResults.length})
-      </Heading>
-
+  if (isFetching) {
+    return (
       <Spinner
         position={"fixed"}
         top={"50%"}
@@ -47,6 +38,15 @@ export const SearchResults = () => {
         left={0}
         right={0}
       ></Spinner>
+    );
+  }
+
+  return (
+    <>
+      <Heading size="md" pb={4}>
+        {searchTerm ? "Search Results" : "All Employees"} (
+        {searchResults && searchResults.length})
+      </Heading>
 
       <SimpleGrid columns={2} spacing={4}>
         {searchResults &&
