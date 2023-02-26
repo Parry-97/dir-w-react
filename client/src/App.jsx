@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { Employee } from "./components/Employee";
 import { Header } from "./components/Header";
 import { SearchResults } from "./components/SearchResults";
+import { ToastContainer } from "./components/Toast";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="employees/:id" element={<Employee />} />
         </Routes>
       </Container>
+      <ToastContainer></ToastContainer>
     </div>
   );
 }

@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { useSearchTerm } from "../hooks/useSearchTerm";
 import { EmployeeResult } from "./EmployeeResult";
+import { toast } from "./Toast";
 
 export const SearchResults = () => {
   const [searchTerm] = useSearchTerm();
@@ -18,6 +19,7 @@ export const SearchResults = () => {
     data: searchResults,
     isLoading,
     isFetching,
+    isError,
   } = useQuery(
     ["search", searchTerm],
     async () => {
@@ -26,8 +28,14 @@ export const SearchResults = () => {
       );
       return response.json();
     },
-    { refetchOnWindowFocus: false }
+    {
+      refetchOnWindowFocus: false,
+    }
   );
+
+  if (isError) {
+    return null;
+  }
 
   if (isFetching) {
     return (
