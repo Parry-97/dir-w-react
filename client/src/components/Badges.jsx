@@ -1,4 +1,5 @@
 import { Divider, Heading, SimpleGrid } from '@chakra-ui/react'
+import AddBadge from './AddBadge'
 import Badge from './Badge'
 
 const Badges = ({ employee }) => {
@@ -15,6 +16,7 @@ const Badges = ({ employee }) => {
             {employee.badgeDetails?.map((badge) =>
               <Badge key={badge.id} badge={badge} />
             )}
+            <AddBadge existingBadges={employee.badgeDetails.map((badge) => badge.id)} onAdd={(badge) => console.log(`SELECTED BADGE ID: ${badge}`)} />
           </SimpleGrid>
         </>)}
     </div>
