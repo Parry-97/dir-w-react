@@ -1,7 +1,8 @@
 import { Divider, Heading, HStack, Image, Text, VStack } from "@chakra-ui/react";
-import { useQuery } from "@tanstack/react-query";
+import { useIsMutating, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import Badges from "./Badges";
+import { Loading } from "./Loading";
 
 export function Employee() {
   const { id } = useParams();
@@ -9,6 +10,12 @@ export function Employee() {
     const response = await fetch(`http://localhost:3030/employees/${id}`);
     return response.json();
   });
+
+
+  const currentMutations = useIsMutating()
+  if (currentMutations > 0) {
+    return <Loading></Loading>
+  }
 
   if (isLoading || isError) return null;
 
