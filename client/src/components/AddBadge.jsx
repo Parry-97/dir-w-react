@@ -5,8 +5,9 @@ import axios from 'axios';
 import React, { useState } from 'react'
 
 const AddBadge = ({ existingBadges, onAdd }) => {
+  const [showWarning, setShowWarning] = useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [selectedBadge, setSelectedBadge] = useState("")
+  const [selectedBadge, setSelectedBadge] = useState(undefined)
   const { data: badges, } = useQuery({
     queryKey: ['badges'],
     queryFn: async () => {
@@ -22,7 +23,13 @@ const AddBadge = ({ existingBadges, onAdd }) => {
   })
 
   function onSubmit() {
+    if (!selectedBadge) {
+      setShowWarning(true)
+      return;
+    }
     onAdd(selectedBadge);
+    setSelectedBadge(undefined)
+    setShowWarning(false)
     onClose()
   }
 
@@ -35,13 +42,16 @@ const AddBadge = ({ existingBadges, onAdd }) => {
         </IconButton>
         <Text>Add new badge</Text>
       </VStack>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={() => { onClose(); setShowWarning(false); }}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Add new badge</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Select placeholder='Select badge' onChange={(evt) => setSelectedBadge(evt.target.value)}>
+            {showWarning && <Text color={"red"} fontWeight="bold" textAlign={"center"}>Please select a badge</Text>}
+            <Select placeholder='Select badge' onChange={(evt) =>
+            // @ts-ignore
+            { setSelectedBadge(evt.target.value); setShowWarning(false) }}>
               {badges?.filter((badge) => !(badge in existingBadges))?.map((badge) =>
                 <option key={badge.id} value={badge.id}>{badge.name}</option>
               )}
@@ -52,7 +62,7 @@ const AddBadge = ({ existingBadges, onAdd }) => {
             <Button colorScheme='blue' mr={3} onClick={onSubmit}>
               Add badge
             </Button>
-            <Button colorScheme='gray' mr={3} onClick={onClose}>
+            <Button colorScheme='gray' mr={3} onClick={() => { onClose(); setShowWarning(false) }}>
               Cancel
             </Button>
           </ModalFooter>

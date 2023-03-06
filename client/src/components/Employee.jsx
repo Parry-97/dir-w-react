@@ -12,10 +12,10 @@ export function Employee() {
   });
 
 
-  const currentMutations = useIsMutating()
-  if (currentMutations > 0) {
-    return <Loading></Loading>
-  }
+  // const currentMutations = useIsMutating()
+  // if (currentMutations > 0) {
+  //   return <Loading></Loading>
+  // }
 
   if (isLoading || isError) return null;
 
