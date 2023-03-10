@@ -1,11 +1,24 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router";
+import { queryClient } from "../../query-client";
 import { EmployeeResult } from "../EmployeeResult";
+
+// @ts-ignore
+export const wrapper = ({ children }) => {
+  return (
+    <div>
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>{children}</MemoryRouter>
+      </QueryClientProvider>
+    </div>
+  )
+}
 
 
 // @ts-ignore
-const customRender = (ui, options) =>
-  render(ui, { wrapper: MemoryRouter, ...options })
+export const customRender = (ui, options) =>
+  render(ui, { wrapper: wrapper, ...options })
 
 describe('the rendered EmployeeResult component', () => {
   const employeeData = {
@@ -47,7 +60,6 @@ describe('the rendered EmployeeResult component', () => {
 
     customRender(<EmployeeResult employee={employeeData}></EmployeeResult>)
     let employeeName = screen.getByText([employeeData.firstName, employeeData.lastName].join(' '))
-    //TODO: Try to search for the entire component
     expect(employeeName).toBeInTheDocument();
   })
 })

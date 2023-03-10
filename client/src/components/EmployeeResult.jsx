@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { useSearchTerm } from "../hooks/useSearchTerm";
 
+// @ts-ignore
 export function EmployeeResult({ employee }) {
   const [searchTerm] = useSearchTerm();
 

@@ -15,10 +15,10 @@ export const Badges = ({ employee }) => {
       alignItems="center"
     >
       <Heading size="lg" pb={4}>
-        {badges.length > 0 ? "Badges" : "No Badges Yet"}
+        {badges?.length > 0 ? "Badges" : "No Badges Yet"}
       </Heading>
       <SimpleGrid width="100%" columns={3} spacingY="40px">
-        {badges.map((badge) => (
+        {badges?.map((badge) => (
           <Badge key={badge.id} badge={badge} />
         ))}
         <AddBadge employee={employee} />
