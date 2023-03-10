@@ -2,6 +2,10 @@ import { badges, employeesWithBadgeDetails, employeesWithoutBadgeDetails } from 
 import { rest } from 'msw'
 // add Mock Service Worker handlers here
 export const handlers = [
+
+  rest.get('http://localhost:3030/employees', (req, res, ctx) => {
+    return res(ctx.json([...employeesWithoutBadgeDetails]))
+  }),
   rest.get('http://localhost:3030/employees/:id', (req, res, ctx) => {
 
     return res(ctx.json(
