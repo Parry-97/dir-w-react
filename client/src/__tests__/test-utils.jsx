@@ -28,3 +28,5 @@ export const customRender = (ui, options) =>
       )
     }, ...options
   })
+
+// @ts-ignore

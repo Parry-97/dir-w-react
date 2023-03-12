@@ -36,6 +36,7 @@ describe('The Search results component should display', () => {
       rest.get('http://localhost:3030/employees', (req, res, ctx) => {
         return res(ctx.json([]))
       })
+      // screen.debug()
     )
     customRender(<SearchResults />, { initialEntries: ["/?q=nonempty"] })
     let pageHeading = await screen.findByText("Search Results (0)")
@@ -45,7 +46,6 @@ describe('The Search results component should display', () => {
       employeeRouteRegex.test(link.getAttribute("href"))
     );
     expect(employeeLinks).toHaveLength(0);
-    // screen.debug()
   })
 
 

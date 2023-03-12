@@ -6,13 +6,6 @@ import { Employee } from "../Employee";
 import { customRender } from "../../__tests__/test-utils";
 
 
-// @ts-ignore
-function wait(milliseconds) {
-  return new Promise(resolve => {
-    setTimeout(resolve, milliseconds);
-  });
-}
-
 describe('The Employee component', () => {
   it('should display the employee data from the server', async () => {
     customRender(<Employee />)
@@ -46,7 +39,6 @@ describe('The Employee component', () => {
     customRender(<Employee />)
     let badgesHeading = await screen.findByText("No Badges Yet")
     expect(badgesHeading).toBeInTheDocument()
-    // screen.debug()
   })
 })
 
