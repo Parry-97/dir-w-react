@@ -4,6 +4,7 @@ Using _React_, _React Router_, and the _Chakra UI_ design system, I've built an 
 
 The Live Project Series is divided into 5 projects, which are listed below and separated each in its own individual folder:
 
+- _Create Employee Page_
 - _Implement Employee Search_
 - _Display React Query States_
 - _Query Mutations_
